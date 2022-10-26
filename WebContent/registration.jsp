@@ -86,7 +86,7 @@
 					</div>
 					<div class="signup-image">
 						<figure>
-							<img src="images/signup-image.jpg" alt="sing up image">
+							<img src="images/signup-image2.jpg" alt="sing up image">
 						</figure>
 						<a href="login.jsp" class="signup-image-link">I am already
 							member</a>
@@ -109,6 +109,47 @@
 		
 		swal("Congrats!!","Account Created Successfully","success");
 	}
+	if(status == "invalidName"){
+		
+		swal("Empty Input!!","Enter Full Name","error");
+	}
+	if(status == "invalidAddress"){
+		
+		swal("Empty Input!!","Enter Your Addres","error");
+	}
+	if(status == "invalidAge"){
+		
+		swal("Empty Input!!","Enter Your Age","error");
+	}
+	if(status == "invalidGender"){
+		
+		swal("Empty Input!!","Enter Your Geneder(Male/Female/other)","error");
+	}
+	if(status == "invalidContact"){
+	
+		swal("Empty Input!!","Enter Your contact number","error");
+	}
+	if(status == "invalidContactnum"){
+		
+		swal("Empty Input!!","Enter Your contact1 number","error");
+	}
+	if(status == "invalidEmail"){
+	
+		swal("Empty Input!!","Enter Your Valid Email","error");
+	}
+	if(status == "invalidUserName"){
+		
+		swal("Empty Input!!","Enter user Name","error");
+	}
+	if(status == "invalidPassword"){
+		
+		swal("Empty Input!!","Enter a Password","error");
+	}
+	if(status == "passwordMissMatch"){
+		
+		swal("Invalid re-password!!","Password miss match","error");
+	}
+
 	
 	</script>
 

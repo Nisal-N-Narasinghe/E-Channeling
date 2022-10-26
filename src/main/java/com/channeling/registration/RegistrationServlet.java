@@ -38,11 +38,68 @@ public class RegistrationServlet extends HttpServlet {
 		String uemail = request.getParameter("email");
 		String uname = request.getParameter("username");
 		String upwd = request.getParameter("pass");
+		String reupwd = request.getParameter("re_pass");
 		
 		//dispatcher servlet object
-		RequestDispatcher dispatcher = null;
+				RequestDispatcher dispatcher = null;
+				
+				Connection con = null;
+				
 		
-		Connection con = null;
+		//server side validation for registration form
+				if(fullname == null || fullname.equals("")){
+					request.setAttribute("status", "invalidName");
+					dispatcher = request.getRequestDispatcher("registration.jsp");
+					dispatcher.forward(request, response);
+					
+				} if(uaddress == null || uaddress.equals("")){
+					request.setAttribute("status", "invalidAddress");
+					dispatcher = request.getRequestDispatcher("registration.jsp");
+					dispatcher.forward(request, response);
+					
+				} if(uage  == null || uage.equals("")){
+					request.setAttribute("status", "invalidAge");
+					dispatcher = request.getRequestDispatcher("registration.jsp");
+					dispatcher.forward(request, response);
+					
+				} if(ugender == null || ugender.equals("")){
+					request.setAttribute("status", "invalidGender");
+					dispatcher = request.getRequestDispatcher("registration.jsp");
+					dispatcher.forward(request, response);
+					
+				} if(ucontact == null || ucontact.equals("")){
+					request.setAttribute("status", "invalidContact");
+					dispatcher = request.getRequestDispatcher("registration.jsp");
+					dispatcher.forward(request, response);
+					
+				}else if(ucontact.length() > 10){
+					request.setAttribute("status", "invalidContactnum");
+					dispatcher = request.getRequestDispatcher("registration.jsp");
+					dispatcher.forward(request, response);
+				}
+				
+				if(uemail == null || uemail.equals("")){
+					request.setAttribute("status", "invalidEmail");
+					dispatcher = request.getRequestDispatcher("registration.jsp");
+					dispatcher.forward(request, response);
+					
+				} if(uname == null || uname.equals("")){
+					request.setAttribute("status", "invalidUserName");
+					dispatcher = request.getRequestDispatcher("registration.jsp");
+					dispatcher.forward(request, response);
+					
+				}if(upwd == null || upwd.equals("")){
+					request.setAttribute("status", "invalidPassword");
+					dispatcher = request.getRequestDispatcher("registration.jsp");
+					dispatcher.forward(request, response);
+					
+				} else if(!upwd.equals(reupwd)) {
+					request.setAttribute("status", "passwordMissMatch");
+					dispatcher = request.getRequestDispatcher("registration.jsp");
+					dispatcher.forward(request, response);
+				}
+				
+		
 		
 		
 		/*

@@ -25,7 +25,7 @@
 				<div class="signin-content">
 					<div class="signin-image">
 						<figure>
-							<img src="images/signin-image.jpg" alt="sing up image">
+							<img src="images/signin-image3.jpg" alt="sing up image">
 						</figure>
 						<a href="registration.jsp" class="signup-image-link">Create an
 							account</a>
@@ -38,8 +38,8 @@
 							<div class="form-group">
 								<label for="username"><i
 									class="zmdi zmdi-account material-icons-name"></i></label> <input
-									type="text" name="username" id="username"
-									placeholder="Enter user name" />
+									type="email" name="username" id="username"
+									placeholder="Enter your email" />
 							</div>
 							<div class="form-group">
 								<label for="password"><i class="zmdi zmdi-lock"></i></label> <input
@@ -88,6 +88,16 @@
 		
 		swal("Sorry!!","Wrong Username or Password","error");
 	}
+	else if(status == "invalidEmail"){
+			
+			swal("Sorry!!","Please enter Email Address","error");
+	}
+	else if(status == "invalidUpwd"){
+		
+		swal("Sorry!!","Please Eneter Password","error");
+	}
+	
+	
 	
 	</script>
 	
