@@ -27,7 +27,7 @@
 						<h2 class="form-title">Sign up</h2>
 					
 						<form method="post" action="register" class="register-form"
-							id="register-form">
+							id="register-form" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="name"><i
 									class="zmdi zmdi-account material-icons-name"></i></label> <input
@@ -71,6 +71,14 @@
 								<input type="password" name="re_pass" id="re_pass"
 									placeholder="Repeat your password" />
 							</div>
+							
+							<div class="form-group">
+								<h4>Add Profile Picture(Optional)</h4>
+								<label for="pimage"><i class="zmdi zmdi-lock-outline"></i></label>
+								<input type="file" name="pimage" id="pimage"
+									placeholder="Add image" />
+							</div>
+							
 							<div class="form-group">
 								<input type="checkbox" name="agree-term" id="agree-term"
 									class="agree-term" /> <label for="agree-term"

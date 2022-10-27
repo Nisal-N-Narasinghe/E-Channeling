@@ -1,6 +1,8 @@
 package com.channeling.registration;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,15 +10,19 @@ import java.sql.PreparedStatement;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 
 /**
  * Servlet implementation class RegistrationServlet
  */
+
+@MultipartConfig
 @WebServlet("/register")
 public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,11 +30,11 @@ public class RegistrationServlet extends HttpServlet {
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/* 
-		 * //check is this servlet page connected)
+		/*
+		 //check is this servlet page connected)
 			PrintWriter out  = response.getWriter();
-			out.print("Working"); 
-		*/
+			out.print("Working"); */
+		
 		
 		String fullname = request.getParameter("name");
 		String uaddress = request.getParameter("address");
@@ -39,6 +45,36 @@ public class RegistrationServlet extends HttpServlet {
 		String uname = request.getParameter("username");
 		String upwd = request.getParameter("pass");
 		String reupwd = request.getParameter("re_pass");
+		
+		Part file = request.getPart("pimage");
+		
+		String imageFileName = file.getSubmittedFileName();
+		
+		String uploadPath  = "C:/Projects/channeling/pimages/"+imageFileName;
+		
+		/*
+		 //check file name captured
+		PrintWriter out  = response.getWriter();
+		out.println(imageFileName); 
+		out.println(uploadPath); 
+		*/
+		
+		//file copy to system folder
+		try {
+			
+		FileOutputStream fos = new FileOutputStream(uploadPath);
+		InputStream is = file.getInputStream();
+		
+		byte[] data = new byte[is.available()];
+		is.read(data);
+		fos.write(data);
+		fos.close();
+		
+		} catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		
 		
 		//dispatcher servlet object
 				RequestDispatcher dispatcher = null;
@@ -121,7 +157,8 @@ public class RegistrationServlet extends HttpServlet {
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/echanneling","root","nisal1234");
-			PreparedStatement pst = con.prepareStatement("insert into usertable(fullName,uAddress,uAge,uGender,uPhone,uEmail,userName,password) values(?,?,?,?,?,?,?,?)");
+			PreparedStatement pst = con.prepareStatement("insert into usertable(fullName,uAddress,uAge,uGender,uPhone,uEmail,userName,password,imageFileName) values(?,?,?,?,?,?,?,?,?)");
+			
 			pst.setString(1, fullname);
 			pst.setString(2, uaddress);
 			pst.setString(3, uage);
@@ -130,6 +167,7 @@ public class RegistrationServlet extends HttpServlet {
 			pst.setString(6, uemail);
 			pst.setString(7, uname);
 			pst.setString(8, upwd);
+			pst.setString(9, imageFileName);
 			
 			
 			int rowCount = pst.executeUpdate();
@@ -148,6 +186,7 @@ public class RegistrationServlet extends HttpServlet {
 			// TODO: handle exception
 			e.printStackTrace();
 		} 
+		
 		
 	}
 }
