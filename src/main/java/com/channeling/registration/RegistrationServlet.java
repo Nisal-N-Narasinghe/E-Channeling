@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 import javax.servlet.RequestDispatcher;
@@ -26,6 +25,12 @@ import javax.servlet.http.Part;
 @WebServlet("/register")
 public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	
+	private static Connection con = null;
+	private static PreparedStatement pst = null;
+	//private static ResultSet rs = null;
+	
        
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,7 +55,7 @@ public class RegistrationServlet extends HttpServlet {
 		
 		String imageFileName = file.getSubmittedFileName();
 		
-		String uploadPath  = "C:/Projects/channeling/pimages/"+imageFileName;
+		String uploadPath  = "C:/Projects/channeling/WebContent/pimages/"+imageFileName;
 		
 		/*
 		 //check file name captured
@@ -79,7 +84,9 @@ public class RegistrationServlet extends HttpServlet {
 		//dispatcher servlet object
 				RequestDispatcher dispatcher = null;
 				
-				Connection con = null;
+				//Connection con = null;
+				
+				
 				
 		
 		//server side validation for registration form
@@ -155,9 +162,15 @@ public class RegistrationServlet extends HttpServlet {
 		//insert details in to database
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/echanneling","root","nisal1234");
-			PreparedStatement pst = con.prepareStatement("insert into usertable(fullName,uAddress,uAge,uGender,uPhone,uEmail,userName,password,imageFileName) values(?,?,?,?,?,?,?,?,?)");
+			//Class.forName("com.mysql.jdbc.Driver");
+			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/echanneling","root","nisal1234");
+			
+			
+			//PreparedStatement pst = con.prepareStatement("insert into usertable(fullName,uAddress,uAge,uGender,uPhone,uEmail,userName,password,imageFileName) values(?,?,?,?,?,?,?,?,?)");
+			
+			con = DBConnect.getConnection();
+			pst = con.prepareStatement("insert into usertable(fullName,uAddress,uAge,uGender,uPhone,uEmail,userName,password,imageFileName) values(?,?,?,?,?,?,?,?,?)");
+			
 			
 			pst.setString(1, fullname);
 			pst.setString(2, uaddress);
