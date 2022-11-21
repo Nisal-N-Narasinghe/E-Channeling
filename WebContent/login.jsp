@@ -27,8 +27,7 @@
 						<figure>
 							<img src="images/signin-image3.jpg" alt="sing up image">
 						</figure>
-						<a href="registration.jsp" class="signup-image-link">Create an
-							account</a>
+						<a style = "text-decoration:none; background:#FFC300" href="registration.jsp" class="signup-image-link">Click to Create an account</a>
 					</div>
 
 					<div class="signin-form">
@@ -54,9 +53,25 @@
 							</div>
 							<div class="form-group form-button">
 								<input type="submit" name="signin" id="signin"
-									class="form-submit" value="Log in" />
+									class="form-submit" disabled="disabled" value="Log in" />
 							</div>
 						</form>
+						
+						<script type="text/javascript">
+							var checker = document.getElementById('remember-me');
+							 var sendbtn = document.getElementById('signin');
+							 // when unchecked or checked, run the function
+							 checker.onchange = function(){
+							if(this.checked){
+							    sendbtn.disabled = false;
+							} else {
+							    sendbtn.disabled = true;
+							}
+							
+							}
+ 						</script>					
+						
+						
 						<div class="social-login">
 							<span class="social-label">Or login with</span>
 							<ul class="socials">
@@ -84,6 +99,11 @@
 	
 	<script type="text/javascript"> 
 	var status = document.getElementById("status").value;
+	
+	if(status == "success"){
+		
+		swal("Account Updated Successfully!!","Please Log in again..","success");
+	}
 	if(status == "failed"){
 		
 		swal("Sorry!!","Wrong Username or Password","error");

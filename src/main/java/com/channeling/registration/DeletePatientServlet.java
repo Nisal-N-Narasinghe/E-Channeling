@@ -32,6 +32,7 @@ public class DeletePatientServlet extends HttpServlet {
 		
 		if(isTrue == true) {
 			
+			request.setAttribute("status", "accountDelete");
 			RequestDispatcher dis = request.getRequestDispatcher("registration.jsp");
 			dis.forward(request, response);
 		}else {

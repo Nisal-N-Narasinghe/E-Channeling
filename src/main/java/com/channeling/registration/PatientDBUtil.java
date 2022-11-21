@@ -7,39 +7,30 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 public class PatientDBUtil {
+	
+	
+	//instance variables
 	private static Connection con = null;
 	//private static PreparedStatement pst = null;
 	private static ResultSet rs = null;
 	private static Statement stmt = null;
-	
-	//instance variable
 	private static boolean isSuccess;
 	
+
 	
-	/*
-	//Validate Customer
-	public static List<Patient> patientDetails(int id,String fName,String address,String age,String gender,String phone,String email,String uName,String password,String imageName){
-		
-		
-		ArrayList<Patient> pat = new ArrayList<>();
-		
-		Patient p = new Patient(id, fName, address, age, gender, phone, email, uName, password, imageName);
-		pat.add(p);
-		
-		return pat;
-	}
-	*/
 	
 	//update patient profile
 	
-	public static boolean updateCustomer(String id,String name,String address,String age,String gender,String phone, String email) {
+	public static boolean updateCustomer(String id,String name,String address,String age,String gender,String phone, String uname) {
 		
 		try {
 			con = DBConnect.getConnection();
 			stmt = con.createStatement();
 			
-			String sql = "Update usertable set fullName='"+name+"',uAddress='"+address+"',uAge='"+age+"',uGender='"+gender+"',uPhone='"+phone+"',uEmail='"+email+"'"  +  "where uID='"+id+"'";
+			String sql = "Update usertable set fullName='"+name+"',uAddress='"+address+"',uAge='"+age+"',uGender='"+gender+"',uPhone='"+phone+"',userName='"+uname+"'"  +  "where uID='"+id+"'";
 			
 			
 			int rs = stmt.executeUpdate(sql);
@@ -61,54 +52,8 @@ public class PatientDBUtil {
 		return isSuccess;
 	}
 	
-	/*
-	//reload profile with updated patient details
-	public static List<Patient> getPatientDetails(String Id) {
-		
-		//convert String id to integer
-		int convertID = Integer.parseInt(Id);
-		
-		ArrayList<Patient> pat = new ArrayList<>();
-		
-		try {
-			
-			con = DBConnect.getConnection();
-			stmt = con.createStatement();
-			
-			String sql = "select * from usertable where uID ='"+convertID+"'";
-			
-			rs = stmt.executeQuery(sql);
-			
-			
-			while(rs.next()) {
-				int id = rs.getInt(1);
-				String fName = rs.getString(2);
-				String address = rs.getString(3);
-				String age = rs.getString(4);
-				String gender = rs.getString(5);
-				String phone = rs.getString(6);
-				String email = rs.getString(7);
-				String uName = rs.getString(8);
-				String password = rs.getString(9);
-				String imageName = rs.getString(10);
-				
-				Patient p = new Patient (id,fName,address,age,gender,phone,email,uName,password,imageName);
-				
-				//add values to array list
-				pat.add(p);
-				
-				
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return pat;
-		
-	}
 	
-	*/
+	//delete profile
 	public static boolean DeletePatient(String id) {
 		
 		
@@ -135,4 +80,50 @@ public class PatientDBUtil {
 		}
 		return isSuccess;
 	}
+	
+	
+	//Method for getting profile details using array list
+	public static List<Patient> getPatientDetails(String id) {
+		//return all patient details
+		ArrayList<Patient> pat = new ArrayList<>();
+		
+		int convertID = Integer.parseInt(id);
+		try {
+			
+			con = DBConnect.getConnection();
+			stmt = con.createStatement();
+			
+			String sql = "select * from usertable where uID ='"+convertID+"'";
+			
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				
+				int uid = rs.getInt(1);
+				String fuName = rs.getString(2);
+				String address = rs.getString(3);
+				String age = rs.getString(4);
+				String gender = rs.getString(5);
+				String phone = rs.getString(6);
+				String uname = rs.getString(8);
+				
+				
+				Patient p = new Patient(uid,fuName,address,age,gender,phone,uname);
+				
+				//add patient object to array list
+				pat.add(p);	
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return pat;
+		
+		
+	}
+	
+	
+
 }

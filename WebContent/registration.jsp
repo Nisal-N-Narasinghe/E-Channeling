@@ -43,13 +43,18 @@
 									class="zmdi zmdi-calendar-check"></i></label> <input
 									type="text" name="age" id="age" placeholder="Enter Your age" />
 							</div>
+							
 							<div class="form-group">
-								<label for="gender"><i
-									class="zmdi zmdi-male-female"></i></label> <input
-									type="text" name="gender" id="gender" placeholder="Gender (male/female/other)" />
-							</div>
+								<h4><i class="zmdi zmdi-male-female"></i> Gender : <select name="gender" id="gender">
+								<option value="default" selected>....Select your Gender....</option>
+								<option value="male">male</option>
+								<option value="female">female</option>
+								<option value="other">other</option>
+								</select></h4>
+							</div>		
+							
 							<div class="form-group">
-								<label for="contact"><i class="zmdi zmdi-lock-outline"></i></label>
+								<label for="contact"><i class="zmdi zmdi-phone"></i></label>
 								<input type="text" name="contact" id="contact"
 									placeholder="Contact no" />
 							</div>
@@ -59,7 +64,7 @@
 							</div>
 							<div class="form-group">
 								<label for="username"><i
-									class="zmdi zmdi-account material-icons-name"></i></label> <input
+									class="zmdi zmdi-face"></i></label> <input
 									type="text" name="username" id="username" placeholder="Simple user name" />
 							</div>
 							<div class="form-group">
@@ -74,7 +79,7 @@
 							
 							<div class="form-group">
 								<h4>Add Profile Picture(Optional)</h4>
-								<label for="pimage"><i class="zmdi zmdi-lock-outline"></i></label>
+								<label for="pimage"><i class="zmdi zmdi-image"></i></label>
 								<input type="file" name="pimage" id="pimage"
 									placeholder="Add image" />
 							</div>
@@ -88,16 +93,30 @@
 							</div>
 							<div class="form-group form-button">
 								<input type="submit" name="signup" id="signup"
-									class="form-submit" value="Register" />
+									class="form-submit"  disabled="disabled" value="Register" />
 							</div>
 						</form>
+						
+						<script type="text/javascript">
+							var checker = document.getElementById('agree-term');
+							 var sendbtn = document.getElementById('signup');
+							 // when unchecked or checked, run the function
+							 checker.onchange = function(){
+							if(this.checked){
+							    sendbtn.disabled = false;
+							} else {
+							    sendbtn.disabled = true;
+							}
+							
+							}
+ 						</script>	
+						
 					</div>
 					<div class="signup-image">
 						<figure>
 							<img src="images/signup-image2.jpg" alt="sing up image">
 						</figure>
-						<a href="login.jsp" class="signup-image-link">I am already
-							member</a>
+							<a style = "text-decoration:none; background:#FFC300 " href="login.jsp" class="signup-image-link">I am already a Member</a>
 					</div>
 				</div>
 			</div>
@@ -139,7 +158,7 @@
 	}
 	if(status == "invalidContactnum"){
 		
-		swal("Empty Input!!","Enter Your contact1 number","error");
+		swal("Invalid Contact Number Length!!","Enter Valid contact number","error");
 	}
 	if(status == "invalidEmail"){
 	
@@ -149,13 +168,25 @@
 		
 		swal("Empty Input!!","Enter user Name","error");
 	}
+	if(status == "invalidUserNameType"){
+		
+		swal("User Name Can't be admin!!","Enter valid user Name","error");
+	}
 	if(status == "invalidPassword"){
 		
 		swal("Empty Input!!","Enter a Password","error");
 	}
+	if(status == "invalidPassFormate"){
+		
+		swal("Password Length Incorrect!!","Password must be 8 characters","error");
+	}
 	if(status == "passwordMissMatch"){
 		
 		swal("Invalid re-password!!","Password miss match","error");
+	}
+	if(status == "accountDelete"){
+		
+		swal("Account Deleted!!","Create New Accoutn or Use Another Account to login","success");
 	}
 
 	

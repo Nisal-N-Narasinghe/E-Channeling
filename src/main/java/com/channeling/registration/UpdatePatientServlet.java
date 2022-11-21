@@ -29,21 +29,21 @@ public class UpdatePatientServlet extends HttpServlet {
 		String age = request.getParameter("age");
 		String gender = request.getParameter("gender");
 		String phone = request.getParameter("phone");
-		String email = request.getParameter("email");
+		String uname = request.getParameter("uname");
 		
 		boolean isTrue;
 		
-		isTrue = PatientDBUtil.updateCustomer(id, name,address,age,gender,phone,email);
+		isTrue = PatientDBUtil.updateCustomer(id, name,address,age,gender,phone,uname);
 		
 		
 		if(isTrue == true) {
 			
 			/*
-			//create list to get updated data
 			List<Patient> patDetails = PatientDBUtil.getPatientDetails(id);
 			request.setAttribute("patDetails", patDetails);
 			*/
 			
+			request.setAttribute("status", "success");
 			RequestDispatcher dis = request.getRequestDispatcher("login.jsp");
 			dis.forward(request, response);
 		}else {

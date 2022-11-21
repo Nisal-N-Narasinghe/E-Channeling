@@ -26,6 +26,17 @@ public class Patient {
 		this.imageName = imageName;
 	}
 
+	public Patient(int id, String fullName, String address, String age, String gender, String phone, String userName) {
+		this.id = id;
+		this.fullName = fullName;
+		this.address = address;
+		this.age = age;
+		this.gender = gender;
+		this.phone = phone;
+		this.userName = userName;
+		
+	}
+
 	public int getId() {
 		return id;
 	}

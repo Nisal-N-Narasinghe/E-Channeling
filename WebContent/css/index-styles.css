@@ -41,7 +41,7 @@
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
-  --bs-primary-rgb: 26, 188, 156;
+  --bs-primary-rgb: 24, 40, 72;
   --bs-secondary-rgb: 44, 62, 80;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
@@ -236,11 +236,11 @@ sup {
 }
 
 a {
-  color: #1abc9c;
+  color: red;
   text-decoration: underline;
 }
 a:hover {
-  color: #15967d;
+  color: #01f1fe;
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -489,7 +489,7 @@ progress {
 }
 
 .lead {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 300;
 }
 
@@ -600,8 +600,8 @@ progress {
 }
 
 .img-fluid {
-  max-width: 100%;
-  height: auto;
+  width: 200px;
+  height: 150px;
 }
 
 .img-thumbnail {
@@ -677,8 +677,7 @@ progress {
 }
 .row > * {
   flex-shrink: 0;
-  width: 100%;
-  max-width: 100%;
+  
   padding-right: calc(var(--bs-gutter-x) * 0.5);
   padding-left: calc(var(--bs-gutter-x) * 0.5);
   margin-top: var(--bs-gutter-y);
@@ -11293,15 +11292,15 @@ html {
 }
 
 .page-section {
-  padding: 6rem 0;
+  padding: 2rem 0;
 }
 .page-section .page-section-heading {
-  font-size: 2.25rem;
+  font-size: 18px;
   line-height: 2rem;
 }
 @media (min-width: 992px) {
   .page-section .page-section-heading {
-    font-size: 3rem;
+    font-size: 2rem;
     line-height: 2.5rem;
   }
 }
@@ -11472,7 +11471,7 @@ html {
   left: 0;
   transition: all 0.2s ease-in-out;
   opacity: 0;
-  background-color: rgba(26, 188, 156, 0.9);
+  background-color: rgba(24,40 , 72);
 }
 .portfolio .portfolio-item .portfolio-item-caption:hover {
   opacity: 1;

@@ -84,7 +84,6 @@ public class RegistrationServlet extends HttpServlet {
 		//dispatcher servlet object
 				RequestDispatcher dispatcher = null;
 				
-				//Connection con = null;
 				
 				
 				
@@ -94,53 +93,78 @@ public class RegistrationServlet extends HttpServlet {
 					request.setAttribute("status", "invalidName");
 					dispatcher = request.getRequestDispatcher("registration.jsp");
 					dispatcher.forward(request, response);
+					return;
 					
 				} if(uaddress == null || uaddress.equals("")){
 					request.setAttribute("status", "invalidAddress");
 					dispatcher = request.getRequestDispatcher("registration.jsp");
 					dispatcher.forward(request, response);
+					return;
 					
 				} if(uage  == null || uage.equals("")){
 					request.setAttribute("status", "invalidAge");
 					dispatcher = request.getRequestDispatcher("registration.jsp");
 					dispatcher.forward(request, response);
+					return;
 					
 				} if(ugender == null || ugender.equals("")){
 					request.setAttribute("status", "invalidGender");
 					dispatcher = request.getRequestDispatcher("registration.jsp");
 					dispatcher.forward(request, response);
+					return;
 					
 				} if(ucontact == null || ucontact.equals("")){
 					request.setAttribute("status", "invalidContact");
 					dispatcher = request.getRequestDispatcher("registration.jsp");
 					dispatcher.forward(request, response);
+					return;
 					
-				}else if(ucontact.length() > 10){
+				}if(ucontact.length() > 10 || ucontact.length() < 10){
 					request.setAttribute("status", "invalidContactnum");
 					dispatcher = request.getRequestDispatcher("registration.jsp");
 					dispatcher.forward(request, response);
+					return;
 				}
 				
 				if(uemail == null || uemail.equals("")){
 					request.setAttribute("status", "invalidEmail");
 					dispatcher = request.getRequestDispatcher("registration.jsp");
 					dispatcher.forward(request, response);
+					return;
 					
 				} if(uname == null || uname.equals("")){
 					request.setAttribute("status", "invalidUserName");
 					dispatcher = request.getRequestDispatcher("registration.jsp");
 					dispatcher.forward(request, response);
+					return;
 					
-				}if(upwd == null || upwd.equals("")){
+				}if(uname.equals("admin")){
+					request.setAttribute("status", "invalidUserNameType");
+					dispatcher = request.getRequestDispatcher("registration.jsp");
+					dispatcher.forward(request, response);
+					return;
+					
+				}
+				if(upwd == null || upwd.equals("")){
 					request.setAttribute("status", "invalidPassword");
 					dispatcher = request.getRequestDispatcher("registration.jsp");
 					dispatcher.forward(request, response);
+					return;
 					
-				} else if(!upwd.equals(reupwd)) {
+				}if(upwd.length() > 8 || upwd.length() < 8){
+					request.setAttribute("status", "invalidPassFormate");
+					dispatcher = request.getRequestDispatcher("registration.jsp");
+					dispatcher.forward(request, response);
+					return;
+					
+				} if(!upwd.equals(reupwd)) {
 					request.setAttribute("status", "passwordMissMatch");
 					dispatcher = request.getRequestDispatcher("registration.jsp");
 					dispatcher.forward(request, response);
-				}
+					return;
+					
+				} 
+				
 				
 		
 		
@@ -162,11 +186,7 @@ public class RegistrationServlet extends HttpServlet {
 		//insert details in to database
 		try {
 			
-			//Class.forName("com.mysql.jdbc.Driver");
-			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/echanneling","root","nisal1234");
 			
-			
-			//PreparedStatement pst = con.prepareStatement("insert into usertable(fullName,uAddress,uAge,uGender,uPhone,uEmail,userName,password,imageFileName) values(?,?,?,?,?,?,?,?,?)");
 			
 			con = DBConnect.getConnection();
 			pst = con.prepareStatement("insert into usertable(fullName,uAddress,uAge,uGender,uPhone,uEmail,userName,password,imageFileName) values(?,?,?,?,?,?,?,?,?)");
@@ -185,12 +205,15 @@ public class RegistrationServlet extends HttpServlet {
 			
 			int rowCount = pst.executeUpdate();
 			
-			dispatcher = request.getRequestDispatcher("registration.jsp");
+			
 			if(rowCount > 0) {
+				
 				request.setAttribute("status", "success");
+				dispatcher = request.getRequestDispatcher("registration.jsp");
 				
 			}else {
 				request.setAttribute("status", "failed");
+				dispatcher = request.getRequestDispatcher("registration.jsp");
 			}
 			dispatcher.forward(request, response);
 			

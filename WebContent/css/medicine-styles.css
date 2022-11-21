@@ -1,0 +1,90 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url('https://fonts.googleapis.com/css?family=Pirata+One|Rubik:900');
+body{
+  background: #f2f2f2;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.search {
+  position: relative;
+  display: flex;
+  width: 70%;
+  margin: auto;
+}
+
+.searchTerm {
+  width: 70%;
+  border: 3px solid  #3399ff;
+  border-right: none;
+  padding: 5px;
+  height: 36px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color:  #3399ff;
+  margin: auto;
+}
+
+.searchTerm:focus{
+  color:  #3399ff;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #00B4CC;
+  background:  #3399ff;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.medicine-table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 50px;
+}
+
+.medicine-table td, .medicine-table th {
+  border: 1px solid black;
+  padding: 8px;
+}
+
+.medicine-table tr {background-color: #4b6cdf;}
+
+.medicine-table tr:hover {background-color: #fff;}
+
+.medicine-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #071378;
+  color: white;
+}
+
+body {
+position: relative;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+background-color: #141E30;
+background: linear-gradient(to right, #24243e, #141E30, #0f0c29); }
+
+h1 {
+text-transform: Uppercase;
+margin-bottom: .2em;
+font-family: 'Rubik', sans-serif;
+font-size: 4rem;
+color: #fff;}

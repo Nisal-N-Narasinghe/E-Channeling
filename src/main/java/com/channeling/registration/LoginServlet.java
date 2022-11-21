@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 		
 		try {
 			
-			//DBconnect class
+			//DBconnect 
 			con = DBConnect.getConnection();
 			pst = con.prepareStatement("select * from usertable where uEmail = ? and password = ? " );
 			
@@ -78,31 +78,11 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("address", rs.getString("uAddress"));
 				session.setAttribute("img", rs.getString("imageFileName"));
 				
-				/*
-				int id = rs.getInt(1);
-				String fName = rs.getString(2);
-				String address = rs.getString(3);
-				String age = rs.getString(4);
-				String gender = rs.getString(5);
-				String phone = rs.getString(6);
-				String email = rs.getString(7);
-				String uName = rs.getString(8);
-				String password = rs.getString(9);
-				String imageName = rs.getString(10);
 				
-				
-				try {
-					
-					List<Patient>patDetails= PatientDBUtil.patientDetails(id, fName, address, age, gender, phone, email, uName, password, imageName);
-					request.setAttribute("patDetails", patDetails);
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				*/
 				
 				
 				if(session.getAttribute("name").equals("admin")) {
+					session.setAttribute("admin", rs.getString("userName"));
 					dispatcher = request.getRequestDispatcher("adminHome.jsp");
 				}else {
 					
@@ -114,7 +94,7 @@ public class LoginServlet extends HttpServlet {
 				dispatcher = request.getRequestDispatcher("login.jsp");
 				
 			}
-			//dispatcher = request.getRequestDispatcher("login.jsp");
+			
 			
 			dispatcher.forward(request, response);
 			
